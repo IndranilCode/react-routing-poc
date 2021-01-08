@@ -34,7 +34,7 @@ const Topics = (props) => {
         </Route>
       </Switch>
 
-      <button onClick={() => goBack()}>Back</button>
+      <button onClick={() => goBack()}>Back from Topics</button>
     </div>
   )
 }
