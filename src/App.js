@@ -1,17 +1,29 @@
 import "./App.css";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom"
+import { BrowserRouter as Router, Switch, Route, Link, Redirect, useHistory } from "react-router-dom"
+import { withRouter } from 'react-router'
 import Home from './Pages/Home'
 import About from './Pages/About'
 import Contact from './Pages/Contact'
 import Topics from './Pages/Topics'
 import PassObjectViaLink from './Pages/PassObjectViaLink'
+import NonLinkRoutePage from './Pages/NonLinkRoutePage'
 
-function App() {
+
+function App(props) {
+  const history = useHistory()
   let objectToPass = {
     name: "Indranil Basu",
     presentCity: "Bangalore",
     originCity: "Kolakta",
   }
+
+  // const gotoRouteNonLinkPage = (e) => {
+  //   console.log(history)
+  //   //history.push('/pass-object-non-link')
+
+  //   console.log(props.router)
+  //   // props.router.push('/contact');
+  // }
 
   return (
     <Router>
@@ -42,6 +54,12 @@ function App() {
           </li>
         </ul>
         <hr />
+
+      {/* <p>
+        <h5>Non Link route</h5><button onClick={() => gotoRouteNonLinkPage()}>Route to NonLinkPage</button>
+      </p> */}
+      
+
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/contact" component={Contact} />
@@ -51,6 +69,8 @@ function App() {
             <Redirect to="/contact" />
           </Route>
           <Route path="/pass-object-link" render={routeProps => <PassObjectViaLink data={objectToPass} {...routeProps} />} />
+          {/* <Route path="/pass-object-non-link" render={routeProps => <NonLinkRoutePage data={objectToPass} {...routeProps} />} /> */}
+          <Route path="/pass-object-non-link" render={routeProps => <NonLinkRoutePage {...routeProps} />} />
         </Switch>
       </div>
     </Router>
